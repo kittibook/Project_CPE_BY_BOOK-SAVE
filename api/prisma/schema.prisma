@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  age       Int
+  disease   String // โรค
+  scores    Score[]
+  DatasetId Int 
+  Dataset Dataset @relation(fields: [DatasetId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Dataset {
+  id        Int      @id @default(autoincrement())
+  dateStart DateTime
+  dateEnd   DateTime
+  Name      String
+  details   String
+  User User[]
+}
+
+model Score {
+  Userid Int
+  gameid Int
+  score  Int
+  time   String
+
+  User User @relation(fields: [Userid], references: [id])
+  game Game @relation(fields: [gameid], references: [id])
+
+  @@id([Userid, gameid]) // กำหนด Composite Primary Key
+}
+
+model Game {
+  id     Int     @id @default(autoincrement())
+  name   String
+  scores Score[]
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  roleId    Int
+  role      Role     @relation(fields: [roleId], references: [id])
+  actions   Action[] // ความสัมพันธ์กับ Action
+  createdAt DateTime @default(now())
+}
+
+model Role {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique
+  admins Admin[]
+}
+
+model Action {
+  id        Int      @id @default(autoincrement())
+  adminId   Int
+  admin     Admin    @relation(fields: [adminId], references: [id])
+  action    String // เช่น "LOGIN", "DELETE_USER", "UPDATE_ROLE"
+  details   String? // รายละเอียดเพิ่มเติม เช่น "ลบ User ID 5"
+  timestamp DateTime @default(now()) // เวลาที่ทำ Action
+}
