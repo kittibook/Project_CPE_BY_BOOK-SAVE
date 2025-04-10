@@ -1,37 +1,41 @@
 "use client"
 
 import LayoutAdmin from "@/app/Components/Layout/admin/admin";
-import { LineChart } from '@mui/x-charts/LineChart';
+import RiskChart from "@/app/Components/UI/admin/dashboard/riskChart";
+import ScoreChart from "@/app/Components/UI/admin/dashboard/scoreChart";
+import ScorePicChart from "@/app/Components/UI/admin/dashboard/screPicChart";
+import UserChart from "@/app/Components/UI/admin/dashboard/userChart";
+import UserLatest from "@/app/Components/UI/admin/dashboard/userLatest";
 
-const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
-const pData = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
-const xLabels = [
-    'Page A',
-    'Page B',
-    'Page C',
-    'Page D',
-    'Page E',
-    'Page F',
-    'Page G',
-];
+
+
+
 
 export default function adminPage() {
     return (
         <LayoutAdmin>
-            <div className="min-h-screen flex flex-col bg-gray-50">
-                <div className="flex justify-between items-center m-16 ">
+            <div className="min-h-screen min-w-[100%] flex flex-col pt-15 pl-5">
+                <div className="flex justify-between items-center  ">
                     <h1 className="text-lg font-medium text-[#1F384C]">แดชบอร์ด</h1>
                 </div>
-                <div className="w-full h-full p-20">
-                    <LineChart
-                        width={500}
-                        height={300}
-                        series={[
-                            { data: pData, label: 'pv' },
-                            { data: uData, label: 'uv' },
-                        ]}
-                        xAxis={[{ scaleType: 'point', data: xLabels }]}
-                    />
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-5">
+                    <div className="col-span-1 lg:col-span-2 transition-all duration-300 p-9 lg:border-r border-[#C8CBD9] w-full  min-h-72 ">
+                        <UserChart />
+                    </div>
+                    <div className="col-span-1 transition-all duration-300 p-9  w-full  min-h-72">
+                        <RiskChart />
+                    </div>
+                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:border-t border-[#C8CBD9]">
+                    <div className="col-span-1 transition-all duration-300 p-9  w-full  min-h-72 lg:border-r border-main-2">
+                        <ScoreChart />
+                    </div>
+                    <div className="col-span-1 transition-all duration-300 p-9  w-full  min-h-72 lg:border-r border-main-2">
+                        <ScorePicChart />
+                    </div>
+                    <div className="col-span-1 transition-all duration-300 p-9  w-full  min-h-72 lg:border-r border-main-2">
+                        <UserLatest />
+                    </div>
                 </div>
             </div>
         </LayoutAdmin>

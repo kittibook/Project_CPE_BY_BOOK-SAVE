@@ -42,15 +42,16 @@ export default function LayoutAdmin({ children }: { children: ReactNode }) {
     return (
         <div className={`flex min-h-screen ${poppins.className}`}>
             <NavBar />
-            <div className="fixed top-0 left-0 min-h-screen w-15 md:w-64 bg-[#F1F2F7] pt-28 flex justify-center">
+            <div className="fixed top-0 left-0 min-h-screen w-15 md:w-64 bg-bgnavbar-2 pt-28 flex justify-center">
                 <div className="space-y-4 w-full px-4">
                     {itemLink.map((value, index) => (
                         <NavItem item={value} key={index} />
                     ))}
                 </div>
             </div>
-            <div className="flex-1 bg-gray-200 ml-[20px] md:ml-58">
-                {children}
+            <div className="flex-1 m-12 md:ml-64 mt-6 md:mt-0 md:m-0 ">
+                <div className="w-full">{children}</div>
+                
             </div>
         </div>
     )
@@ -68,7 +69,7 @@ const NavItem = ({
         <Link
             key={item.to}
             href={item.to}
-            className={`flex items-center justify-center md:justify-normal md:space-x-3 md:p-3 rounded-lg  md:text-sm  ${isActive ? "bg-[#c9d2ff] hover:bg-[#bcc6ff] text-[#5A67BA]" : " hover:bg-[#e8ebff] text-[#5A67BA]/60"
+            className={`flex items-center justify-center md:justify-normal md:space-x-3 md:p-3 rounded-lg  md:text-sm  ${isActive ? "bg-bgnavbar-1/55 hover:bg-bgnavbar-1/40 text-main" : " hover:bg-[#e8ebff] text-main/60"
                 }`}
         >
             {item.icon}

@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+@theme {
+  --color-main: #5A67BA;
+  --color-main-1: #707FDD;
+  --color-main-2: #DDE4F0;
+  --color-btn-dashboard: #FBFCFE;
+  --color-bgnavbar-1: #8998fb;
+  --color-bgnavbar-2: #F1F2F7;
+  --color-data-set: #6D5BD0;
+  --color-data-set-bg: #F4F2FF;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
